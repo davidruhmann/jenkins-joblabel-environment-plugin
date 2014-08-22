@@ -13,19 +13,19 @@ import java.util.logging.Logger;
 public class JobLabelEnvironmentContributor extends EnvironmentContributor {
 	@Override
 	public void buildEnvironmentFor(Job job, EnvVars env, TaskListener listener) {
-        if (!(job instanceof AbstractProject)) {
-            LOGGER.finer(String.format("Skipping JOB_LABELS for %s because it's the wrong type", job.getFullDisplayName()));
-            return;
-        }
-        AbstractProject project = (AbstractProject)job;
-        String labelString = project.getAssignedLabelString();
-        if (labelString == null) {
-            LOGGER.finer(String.format("No label specified for job %s", project.getFullDisplayName()));
-            return;
-        }
-        env.put("JOB_LABELS", labelString);
-        LOGGER.fine(String.format("JOB_LABELS for %s are %s", project.getFullDisplayName(), labelString));
+		if (!(job instanceof AbstractProject)) {
+			LOGGER.finer(String.format("Skipping JOB_LABELS for %s because it's the wrong type", job.getFullDisplayName()));
+			return;
+		}
+		AbstractProject project = (AbstractProject)job;
+		String labelString = project.getAssignedLabelString();
+		if (labelString == null) {
+			LOGGER.finer(String.format("No label specified for job %s", project.getFullDisplayName()));
+			return;
+		}
+		env.put("JOB_LABELS", labelString);
+		LOGGER.fine(String.format("JOB_LABELS for %s are %s", project.getFullDisplayName(), labelString));
 	}
 
-    private static final Logger LOGGER = Logger.getLogger(JobLabelEnvironmentContributor.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(JobLabelEnvironmentContributor.class.getName());
 }
